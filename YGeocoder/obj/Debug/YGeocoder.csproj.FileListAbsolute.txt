@@ -1,0 +1,9 @@
+d:\aleksandrk\Documents\Visual Studio 2013\Projects\YGeocoder\YGeocoder\bin\Debug\YGeocoder.exe.config
+d:\aleksandrk\Documents\Visual Studio 2013\Projects\YGeocoder\YGeocoder\bin\Debug\YGeocoder.exe
+d:\aleksandrk\Documents\Visual Studio 2013\Projects\YGeocoder\YGeocoder\bin\Debug\YGeocoder.pdb
+d:\aleksandrk\Documents\Visual Studio 2013\Projects\YGeocoder\YGeocoder\obj\Debug\YGeocoder.fmMain.resources
+d:\aleksandrk\Documents\Visual Studio 2013\Projects\YGeocoder\YGeocoder\obj\Debug\YGeocoder.Properties.Resources.resources
+d:\aleksandrk\Documents\Visual Studio 2013\Projects\YGeocoder\YGeocoder\obj\Debug\YGeocoder.csproj.GenerateResource.Cache
+d:\aleksandrk\Documents\Visual Studio 2013\Projects\YGeocoder\YGeocoder\obj\Debug\YGeocoder.exe
+d:\aleksandrk\Documents\Visual Studio 2013\Projects\YGeocoder\YGeocoder\obj\Debug\YGeocoder.pdb
+d:\aleksandrk\Documents\Visual Studio 2013\Projects\YGeocoder\YGeocoder\obj\Debug\YGeocoder.csprojResolveAssemblyReference.cache

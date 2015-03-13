@@ -1,0 +1,2 @@
+-Add srings processing (words replacement, exception)
+-Add cut till geocode feature
