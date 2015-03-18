@@ -36,7 +36,7 @@ namespace Yandex
             ns.AddNamespace("ns", "http://maps.yandex.ru/ymaps/1.x");
             ns.AddNamespace("opengis", "http://www.opengis.net/gml");
             ns.AddNamespace("geocoder", "http://maps.yandex.ru/geocoder/1.x");
-//            ns.AddNamespace("addressdetails", "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0");
+            ns.AddNamespace("oasis", "urn:oasis:names:tc:ciq:xsdschema:xAL:2.0");
 
             // select geo objects
             XmlNodeList nodes = doc.SelectNodes("//ns:ymaps/ns:GeoObjectCollection/opengis:featureMember/ns:GeoObject", ns);
@@ -45,13 +45,37 @@ namespace Yandex
                 var point_node = node.SelectSingleNode("opengis:Point/opengis:pos", ns);
                 var bounds_node = node.SelectSingleNode("opengis:boundedBy/opengis:Envelope", ns);
                 var meta_node = node.SelectSingleNode("opengis:metaDataProperty/geocoder:GeocoderMetaData", ns);
+                var addr_details_node = node.SelectSingleNode("opengis:metaDataProperty/geocoder:GeocoderMetaData/oasis:AddressDetails", ns);
+                XmlNode tn = addr_details_node.SelectSingleNode("//oasis:Country", ns);
+
+                AddressDetails ad = new AddressDetails();
+
+                tn = addr_details_node.SelectSingleNode("//oasis:CountryNameCode", ns);
+                ad.countryNameCode = tn != null ? tn.InnerText : "";
+
+                tn = addr_details_node.SelectSingleNode("//oasis:CountryName", ns);
+                ad.countryName = tn != null ? tn.InnerText : "";
+                tn = addr_details_node.SelectSingleNode("//oasis:AdministrativeAreaName", ns);
+                ad.administrativeAreaName = tn != null ? tn.InnerText : "";
+                tn = addr_details_node.SelectSingleNode("//oasis:SubAdministrativeAreaName", ns);
+                ad.subAdministrativeAreaName = tn != null ? tn.InnerText : "";
+                tn = addr_details_node.SelectSingleNode("//oasis:LocalityName", ns);
+                ad.localityName = tn != null ? tn.InnerText : "";
+                tn = addr_details_node.SelectSingleNode("//oasis:ThoroughfareName", ns);
+                ad.thoroughfareName = tn != null ? tn.InnerText : "";
+                tn = addr_details_node.SelectSingleNode("//oasis:PremiseName", ns);
+                ad.premiseName = tn != null ? tn.InnerText : "";
+                tn = addr_details_node.SelectSingleNode("//oasis:PremiseNumber", ns);
+                ad.premiseNumber = tn != null ? tn.InnerText : "";
+                
+// BuildingName, PostOffice, PostalCode
 
                 GeoObject obj = new GeoObject {
                     Point = point_node == null ? new GeoPoint() : GeoPoint.Parse(point_node.InnerText),
                     BoundedBy = bounds_node == null ? new GeoBound() : new GeoBound(
                         GeoPoint.Parse(bounds_node["lowerCorner"].InnerText), GeoPoint.Parse(bounds_node["upperCorner"].InnerText)
                         ),
-                    GeocoderMetaData = new GeoMetaData(meta_node["text"].InnerText, meta_node["kind"].InnerText, meta_node["precision"].InnerText)
+                    GeocoderMetaData = new GeoMetaData(meta_node["text"].InnerText, meta_node["kind"].InnerText, meta_node["precision"].InnerText, ad)
 
                 };
                 _geo_objects.Add(obj);
@@ -103,6 +127,15 @@ namespace Yandex
             this.Precision = ParsePrecision(precision);
             this.AddrDetails = new AddressDetails();
         }
+
+        public GeoMetaData(string text, string kind, string precision, AddressDetails addrDetails)
+        {
+            this.Text = text;
+            this.Kind = ParseKind(kind);
+            this.Precision = ParsePrecision(precision);
+            this.AddrDetails = addrDetails;
+        }
+        
         public GeoMetaData(string text, KindType kind, PrecisionType precision)
         {
             this.Text = text;
@@ -133,7 +166,25 @@ namespace Yandex
 
     public struct AddressDetails
     {
-        public string countryNameCode, countryName, administrativeAreaName, subAdministrativeAreaName, localityName, thoroughfareName, premiseNumber;
+        public string countryNameCode, countryName, administrativeAreaName, subAdministrativeAreaName, localityName, thoroughfareName, premiseName, premiseNumber;
+    
+/*        public AddressDetails()
+        {
+            countryNameCode = countryName = administrativeAreaName = subAdministrativeAreaName = localityName = thoroughfareName = premiseNumber = "";
+        }
+
+        public AddressDetails(string countryCode, string country, string administrativeArea, string subAdministrativeArea, string locality, string premise)
+        {
+            countryNameCode = countryCode;
+            countryName = country;
+            administrativeAreaName = administrativeArea;
+            subAdministrativeAreaName = subAdministrativeArea;
+            localityName = locality;
+            thoroughfareName = "";
+            premiseNumber = premise;
+
+        }
+*/
     }
     
     public struct GeoPoint

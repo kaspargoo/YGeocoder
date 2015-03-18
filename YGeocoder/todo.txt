@@ -1,2 +1,6 @@
--Add srings processing (words replacement, exception)
--Add cut till geocode feature
+- Add srings processing (words replacement, exception)
+V Add cut till geocode feature
+- Separate thread for batch processing
+- Geocode selected meantime
+V Clear confirmation
+V Insert number

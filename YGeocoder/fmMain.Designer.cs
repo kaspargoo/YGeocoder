@@ -32,7 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fmMain));
             this.panel1 = new System.Windows.Forms.Panel();
             this.cbCenterPriority = new System.Windows.Forms.CheckBox();
-            this.cbGetReverseAddr = new System.Windows.Forms.CheckBox();
+            this.cbCutIfFail = new System.Windows.Forms.CheckBox();
             this.lbLang = new System.Windows.Forms.Label();
             this.cbLang = new System.Windows.Forms.ComboBox();
             this.lbCoord = new System.Windows.Forms.Label();
@@ -43,21 +43,9 @@
             this.lbManual = new System.Windows.Forms.Label();
             this.tbAddress = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btGeoSelected = new System.Windows.Forms.Button();
             this.btStop = new System.Windows.Forms.Button();
             this.dgData = new System.Windows.Forms.DataGridView();
-            this.Address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ReverseAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Long = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Distance = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Kind = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Precision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Country = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Adm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SubAdm = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Locality = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Thoroughfare = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Premise = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmStripe = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.miCopyAll = new System.Windows.Forms.ToolStripMenuItem();
             this.miCopy = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,6 +58,22 @@
             this.ssBar = new System.Windows.Forms.StatusStrip();
             this.tsProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.tsStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.N = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Request = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReverseAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Lat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Long = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Distance = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Kind = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Precision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Country = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Adm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SubAdm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Locality = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Thoroughfare = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Premise = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PremiseNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GoodRequest = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgData)).BeginInit();
@@ -80,7 +84,7 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.cbCenterPriority);
-            this.panel1.Controls.Add(this.cbGetReverseAddr);
+            this.panel1.Controls.Add(this.cbCutIfFail);
             this.panel1.Controls.Add(this.lbLang);
             this.panel1.Controls.Add(this.cbLang);
             this.panel1.Controls.Add(this.lbCoord);
@@ -106,16 +110,15 @@
             this.cbCenterPriority.Text = "Center priority";
             this.cbCenterPriority.UseVisualStyleBackColor = true;
             // 
-            // cbGetReverseAddr
+            // cbCutIfFail
             // 
-            this.cbGetReverseAddr.AutoSize = true;
-            this.cbGetReverseAddr.Location = new System.Drawing.Point(197, 97);
-            this.cbGetReverseAddr.Name = "cbGetReverseAddr";
-            this.cbGetReverseAddr.Size = new System.Drawing.Size(144, 17);
-            this.cbGetReverseAddr.TabIndex = 5;
-            this.cbGetReverseAddr.Text = "Request reverse address";
-            this.cbGetReverseAddr.UseVisualStyleBackColor = true;
-            this.cbGetReverseAddr.Visible = false;
+            this.cbCutIfFail.AutoSize = true;
+            this.cbCutIfFail.Location = new System.Drawing.Point(197, 97);
+            this.cbCutIfFail.Name = "cbCutIfFail";
+            this.cbCutIfFail.Size = new System.Drawing.Size(71, 17);
+            this.cbCutIfFail.TabIndex = 5;
+            this.cbCutIfFail.Text = "Try to cut";
+            this.cbCutIfFail.UseVisualStyleBackColor = true;
             // 
             // lbLang
             // 
@@ -209,6 +212,7 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btGeoSelected);
             this.panel2.Controls.Add(this.btStop);
             this.panel2.Controls.Add(this.dgData);
             this.panel2.Controls.Add(this.lbAbout);
@@ -222,6 +226,18 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(839, 270);
             this.panel2.TabIndex = 12;
+            // 
+            // btGeoSelected
+            // 
+            this.btGeoSelected.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btGeoSelected.Location = new System.Drawing.Point(590, 222);
+            this.btGeoSelected.Name = "btGeoSelected";
+            this.btGeoSelected.Size = new System.Drawing.Size(75, 23);
+            this.btGeoSelected.TabIndex = 16;
+            this.btGeoSelected.Tag = "1";
+            this.btGeoSelected.Text = "Selected";
+            this.btGeoSelected.UseVisualStyleBackColor = true;
+            this.btGeoSelected.Click += new System.EventHandler(this.btGeoAll_Click);
             // 
             // btStop
             // 
@@ -242,7 +258,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Address,
+            this.N,
+            this.Request,
             this.ReverseAddress,
             this.Lat,
             this.Long,
@@ -254,20 +271,145 @@
             this.SubAdm,
             this.Locality,
             this.Thoroughfare,
-            this.Premise});
+            this.Premise,
+            this.PremiseNum,
+            this.GoodRequest});
             this.dgData.ContextMenuStrip = this.cmStripe;
             this.dgData.Location = new System.Drawing.Point(15, 23);
             this.dgData.Name = "dgData";
             this.dgData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgData.Size = new System.Drawing.Size(812, 193);
             this.dgData.TabIndex = 8;
+            this.dgData.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgData_RowsAdded);
             // 
-            // Address
+            // cmStripe
             // 
-            this.Address.FillWeight = 150F;
-            this.Address.HeaderText = "Address";
-            this.Address.Name = "Address";
-            this.Address.Width = 300;
+            this.cmStripe.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.miCopyAll,
+            this.miCopy,
+            this.miPaste});
+            this.cmStripe.Name = "cmStripe";
+            this.cmStripe.Size = new System.Drawing.Size(120, 70);
+            // 
+            // miCopyAll
+            // 
+            this.miCopyAll.Name = "miCopyAll";
+            this.miCopyAll.Size = new System.Drawing.Size(119, 22);
+            this.miCopyAll.Text = "Copy All";
+            this.miCopyAll.Click += new System.EventHandler(this.miCopyAll_Click);
+            // 
+            // miCopy
+            // 
+            this.miCopy.Name = "miCopy";
+            this.miCopy.Size = new System.Drawing.Size(119, 22);
+            this.miCopy.Text = "Copy";
+            this.miCopy.Click += new System.EventHandler(this.miCopy_Click);
+            // 
+            // miPaste
+            // 
+            this.miPaste.Name = "miPaste";
+            this.miPaste.Size = new System.Drawing.Size(119, 22);
+            this.miPaste.Text = "Paste";
+            this.miPaste.Click += new System.EventHandler(this.miPaste_Click);
+            // 
+            // lbAbout
+            // 
+            this.lbAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lbAbout.AutoSize = true;
+            this.lbAbout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.lbAbout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbAbout.Location = new System.Drawing.Point(12, 229);
+            this.lbAbout.Name = "lbAbout";
+            this.lbAbout.Size = new System.Drawing.Size(35, 13);
+            this.lbAbout.TabIndex = 15;
+            this.lbAbout.Text = "About";
+            this.lbAbout.Click += new System.EventHandler(this.lbAbout_Click);
+            // 
+            // btGeoAll
+            // 
+            this.btGeoAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btGeoAll.Location = new System.Drawing.Point(671, 222);
+            this.btGeoAll.Name = "btGeoAll";
+            this.btGeoAll.Size = new System.Drawing.Size(75, 23);
+            this.btGeoAll.TabIndex = 11;
+            this.btGeoAll.Tag = "";
+            this.btGeoAll.Text = "All";
+            this.btGeoAll.UseVisualStyleBackColor = true;
+            this.btGeoAll.Click += new System.EventHandler(this.btGeoAll_Click);
+            // 
+            // btClear
+            // 
+            this.btClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btClear.Location = new System.Drawing.Point(509, 222);
+            this.btClear.Name = "btClear";
+            this.btClear.Size = new System.Drawing.Size(75, 23);
+            this.btClear.TabIndex = 10;
+            this.btClear.Text = "Clear";
+            this.btClear.UseVisualStyleBackColor = true;
+            this.btClear.Click += new System.EventHandler(this.btClear_Click);
+            // 
+            // btOpen
+            // 
+            this.btOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btOpen.Enabled = false;
+            this.btOpen.Location = new System.Drawing.Point(428, 222);
+            this.btOpen.Name = "btOpen";
+            this.btOpen.Size = new System.Drawing.Size(75, 23);
+            this.btOpen.TabIndex = 9;
+            this.btOpen.Text = "Open";
+            this.btOpen.UseVisualStyleBackColor = true;
+            // 
+            // lbBatch
+            // 
+            this.lbBatch.AutoSize = true;
+            this.lbBatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbBatch.Location = new System.Drawing.Point(12, 3);
+            this.lbBatch.Name = "lbBatch";
+            this.lbBatch.Size = new System.Drawing.Size(116, 17);
+            this.lbBatch.TabIndex = 11;
+            this.lbBatch.Text = "Batch geocode";
+            // 
+            // ssBar
+            // 
+            this.ssBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsProgressBar,
+            this.tsStatus});
+            this.ssBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.ssBar.Location = new System.Drawing.Point(0, 367);
+            this.ssBar.Name = "ssBar";
+            this.ssBar.Size = new System.Drawing.Size(839, 22);
+            this.ssBar.TabIndex = 18;
+            this.ssBar.Text = "statusStrip1";
+            // 
+            // tsProgressBar
+            // 
+            this.tsProgressBar.Name = "tsProgressBar";
+            this.tsProgressBar.Size = new System.Drawing.Size(200, 16);
+            // 
+            // tsStatus
+            // 
+            this.tsStatus.Name = "tsStatus";
+            this.tsStatus.Size = new System.Drawing.Size(39, 17);
+            this.tsStatus.Text = "Ready";
+            this.tsStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // N
+            // 
+            this.N.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.N.Frozen = true;
+            this.N.HeaderText = "N";
+            this.N.MinimumWidth = 4;
+            this.N.Name = "N";
+            this.N.ReadOnly = true;
+            this.N.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.N.Width = 40;
+            // 
+            // Request
+            // 
+            this.Request.FillWeight = 150F;
+            this.Request.HeaderText = "Request";
+            this.Request.Name = "Request";
+            this.Request.Width = 300;
             // 
             // ReverseAddress
             // 
@@ -333,115 +475,16 @@
             this.Premise.HeaderText = "Premise";
             this.Premise.Name = "Premise";
             // 
-            // cmStripe
+            // PremiseNum
             // 
-            this.cmStripe.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.miCopyAll,
-            this.miCopy,
-            this.miPaste});
-            this.cmStripe.Name = "cmStripe";
-            this.cmStripe.Size = new System.Drawing.Size(120, 70);
+            this.PremiseNum.HeaderText = "PremiseNum";
+            this.PremiseNum.Name = "PremiseNum";
             // 
-            // miCopyAll
+            // GoodRequest
             // 
-            this.miCopyAll.Name = "miCopyAll";
-            this.miCopyAll.Size = new System.Drawing.Size(119, 22);
-            this.miCopyAll.Text = "Copy All";
-            this.miCopyAll.Click += new System.EventHandler(this.miCopyAll_Click);
-            // 
-            // miCopy
-            // 
-            this.miCopy.Name = "miCopy";
-            this.miCopy.Size = new System.Drawing.Size(119, 22);
-            this.miCopy.Text = "Copy";
-            this.miCopy.Click += new System.EventHandler(this.miCopy_Click);
-            // 
-            // miPaste
-            // 
-            this.miPaste.Name = "miPaste";
-            this.miPaste.Size = new System.Drawing.Size(119, 22);
-            this.miPaste.Text = "Paste";
-            this.miPaste.Click += new System.EventHandler(this.miPaste_Click);
-            // 
-            // lbAbout
-            // 
-            this.lbAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lbAbout.AutoSize = true;
-            this.lbAbout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbAbout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbAbout.Location = new System.Drawing.Point(12, 229);
-            this.lbAbout.Name = "lbAbout";
-            this.lbAbout.Size = new System.Drawing.Size(35, 13);
-            this.lbAbout.TabIndex = 15;
-            this.lbAbout.Text = "About";
-            this.lbAbout.Click += new System.EventHandler(this.lbAbout_Click);
-            // 
-            // btGeoAll
-            // 
-            this.btGeoAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btGeoAll.Location = new System.Drawing.Point(671, 222);
-            this.btGeoAll.Name = "btGeoAll";
-            this.btGeoAll.Size = new System.Drawing.Size(75, 23);
-            this.btGeoAll.TabIndex = 11;
-            this.btGeoAll.Text = "Batch";
-            this.btGeoAll.UseVisualStyleBackColor = true;
-            this.btGeoAll.Click += new System.EventHandler(this.btGeoAll_Click);
-            // 
-            // btClear
-            // 
-            this.btClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btClear.Location = new System.Drawing.Point(590, 222);
-            this.btClear.Name = "btClear";
-            this.btClear.Size = new System.Drawing.Size(75, 23);
-            this.btClear.TabIndex = 10;
-            this.btClear.Text = "Clear";
-            this.btClear.UseVisualStyleBackColor = true;
-            this.btClear.Click += new System.EventHandler(this.btClear_Click);
-            // 
-            // btOpen
-            // 
-            this.btOpen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btOpen.Enabled = false;
-            this.btOpen.Location = new System.Drawing.Point(509, 222);
-            this.btOpen.Name = "btOpen";
-            this.btOpen.Size = new System.Drawing.Size(75, 23);
-            this.btOpen.TabIndex = 9;
-            this.btOpen.Text = "Open";
-            this.btOpen.UseVisualStyleBackColor = true;
-            // 
-            // lbBatch
-            // 
-            this.lbBatch.AutoSize = true;
-            this.lbBatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbBatch.Location = new System.Drawing.Point(12, 3);
-            this.lbBatch.Name = "lbBatch";
-            this.lbBatch.Size = new System.Drawing.Size(116, 17);
-            this.lbBatch.TabIndex = 11;
-            this.lbBatch.Text = "Batch geocode";
-            // 
-            // ssBar
-            // 
-            this.ssBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsProgressBar,
-            this.tsStatus});
-            this.ssBar.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.ssBar.Location = new System.Drawing.Point(0, 367);
-            this.ssBar.Name = "ssBar";
-            this.ssBar.Size = new System.Drawing.Size(839, 22);
-            this.ssBar.TabIndex = 18;
-            this.ssBar.Text = "statusStrip1";
-            // 
-            // tsProgressBar
-            // 
-            this.tsProgressBar.Name = "tsProgressBar";
-            this.tsProgressBar.Size = new System.Drawing.Size(200, 16);
-            // 
-            // tsStatus
-            // 
-            this.tsStatus.Name = "tsStatus";
-            this.tsStatus.Size = new System.Drawing.Size(39, 17);
-            this.tsStatus.Text = "Ready";
-            this.tsStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.GoodRequest.HeaderText = "Good Request";
+            this.GoodRequest.Name = "GoodRequest";
+            this.GoodRequest.Width = 200;
             // 
             // fmMain
             // 
@@ -496,8 +539,10 @@
         private System.Windows.Forms.Label lbLang;
         private System.Windows.Forms.ComboBox cbLang;
         private System.Windows.Forms.CheckBox cbCenterPriority;
-        private System.Windows.Forms.CheckBox cbGetReverseAddr;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Address;
+        private System.Windows.Forms.CheckBox cbCutIfFail;
+        private System.Windows.Forms.Button btGeoSelected;
+        private System.Windows.Forms.DataGridViewTextBoxColumn N;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Request;
         private System.Windows.Forms.DataGridViewTextBoxColumn ReverseAddress;
         private System.Windows.Forms.DataGridViewTextBoxColumn Lat;
         private System.Windows.Forms.DataGridViewTextBoxColumn Long;
@@ -510,6 +555,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Locality;
         private System.Windows.Forms.DataGridViewTextBoxColumn Thoroughfare;
         private System.Windows.Forms.DataGridViewTextBoxColumn Premise;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PremiseNum;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GoodRequest;
     }
 }
 
